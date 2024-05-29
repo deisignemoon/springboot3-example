@@ -1,2 +1,0 @@
-cache:
-  values: virtualTableCacheManager,virtualTableColumnsCacheManager,virtualTableDataCacheManager,virtualTableIndexCacheManager

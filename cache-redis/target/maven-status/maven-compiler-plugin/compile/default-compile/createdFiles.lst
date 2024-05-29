@@ -1,7 +1,0 @@
-com\xiacong\util\RedisSequenceUtil.class
-com\xiacong\repository\impl\RedisRepositoryImpl.class
-com\xiacong\repository\RedisRepostory.class
-com\xiacong\common\converter\RedissionConverter.class
-com\xiacong\common\constant\RedisConstant.class
-com\xiacong\util\RedissonUtil.class
-com\xiacong\model\aggreate\RedisAggreate.class
