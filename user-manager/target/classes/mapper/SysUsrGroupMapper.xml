@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiacong.mapper.SysUsrGroupMapper">
+
+    <resultMap id="BaseResultMap" type="com.xiacong.model.domain.SysUsrGroup">
+            <result property="usrNo" column="usr_no" jdbcType="VARCHAR"/>
+            <result property="groupCode" column="group_code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        usr_no,group_code
+    </sql>
+    <select id="selectAllByUsrNo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_usr_group
+        where
+        usr_no = #{usrNo,jdbcType=VARCHAR}
+    </select>
+</mapper>

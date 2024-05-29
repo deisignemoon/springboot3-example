@@ -1,0 +1,189 @@
+server:
+  port: 8080
+  shutdown: graceful #优雅停机
+spring:
+  main:
+    allow-circular-references: false
+  application:
+    name: maindata
+  lifecycle:
+    timeout-per-shutdown-phase: 30s #t缓冲时间配置，默认30s
+  #安全配置
+  #security:
+  #  user:
+  #    name: admin
+  #    password: admin
+  # 多数据源配置
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为 master
+      strict: true # 设置严格模式，当数据源找不到时，是否抛出异常，默认为false不抛出
+      datasource:
+        master: # 主库
+          url: jdbc:mysql://192.168.197.100:3306/maindata?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useServerPrepStmts=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&nullCatalogMeansCurrent=true
+          username: root
+          password: 123456
+          type: com.alibaba.druid.pool.DruidDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slave: # 从库
+          url: jdbc:mysql://192.168.197.100:3306/maindata?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useServerPrepStmts=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&nullCatalogMeansCurrent=true
+          username: root
+          password: 123456
+          type: com.alibaba.druid.pool.DruidDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+  #  单数据源配置
+  #  datasource:
+  #    url: jdbc:mysql://192.168.197.100:3306/maindata?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useServerPrepStmts=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&nullCatalogMeansCurrent=true
+  #    username: root
+  #    password: 123456
+  #    type: com.alibaba.druid.pool.DruidDataSource
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 1abb83bd-2aa4-47ad-8953-001da367723d
+  #启动虚拟线程
+  threads:
+    virtual:
+      enabled: true
+  redis:
+    redisson:
+      # yaml中 | 表示多行文本块
+      config: |
+        singleServerConfig:
+          password: ningzaichun
+          address: redis://192.168.197.100:6379
+          database: 0
+          connectTimeout: 10000
+          timeout: 3000
+        threads: 16
+        nettyThreads: 32
+        codec: !<org.redisson.codec.JsonJacksonCodec> {}
+        transportMode: "NIO"
+        ##clusterServersConfig:
+        ##  idleConnectionTimeout: 10000
+        ##  connectTimeout: 10000
+        ##  timeout: 3000
+        ##  retryAttempts: 3
+        ##  retryInterval: 1500
+        ##  failedSlaveReconnectionInterval: 3000
+        ##  failedSlaveCheckInterval: 60000
+        ##  password: null
+        ##  subscriptionsPerConnection: 5
+        ##  clientName: null
+        ##  loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
+        ##  subscriptionConnectionMinimumIdleSize: 1
+        ##  subscriptionConnectionPoolSize: 50
+        ##  slaveConnectionMinimumIdleSize: 24
+        ##  slaveConnectionPoolSize: 64
+        ##  masterConnectionMinimumIdleSize: 24
+        ##  masterConnectionPoolSize: 64
+        ##  readMode: "SLAVE"
+        ##  subscriptionMode: "SLAVE"
+        ##  nodeAddresses:
+        ##  - "redis://127.0.0.1:7004"
+        ##  - "redis://127.0.0.1:7001"
+        ##  - "redis://127.0.0.1:7000"
+        ##  scanInterval: 1000
+        ##  pingConnectionInterval: 0
+        ##  keepAlive: false
+        ##  tcpNoDelay: false
+        ##threads: 16
+        ##nettyThreads: 32
+        ##codec: !<org.redisson.codec.Kryo5Codec> {}
+        ##transportMode: "NIO"
+  ai:
+    openai:
+      api-key: sk-OsiCITfyU0X5OR0eNUQCiGtqMzt4ANfGO8nKNsPYuRIyPm9Z
+      ## http://www.aicnn.cn/setting
+      base-url: https://api.aicnn.cn
+
+## MyBatis-plus配置
+mybatis-plus:
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+dubbo:
+  application:
+    name: ${spring.application.name}
+  provider: &dubbocofig
+    filter: traceId
+    check: false
+    retries: 0
+    timeout: 10000
+  consumer:
+    <<: *dubbocofig
+    #filter: traceId
+    #check: false
+    #retries: 0
+    #timeout: 10000
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://127.0.0.1:8848
+  scan:
+    basePackages: com.xiacong.provider
+cache:
+  values: virtualTableCacheManager,virtualTableColumnsCacheManager,virtualTableDataCacheManager,virtualTableIndexCacheManager
+log:
+  level: debug
+  path: /home/moe/logs
+
+management:
+  port: 8080
+  security:
+    enabled: false
+  endpoints:
+    web:
+      #cros调用配置
+      #      cors:
+      #        allowed-origins: https://www.choupangxia.com
+      #        allowed-methods: GET,POST
+      exposure:
+        include: '*'
+  #基础路径修改，默认为 /actuator
+  #      base-path: /monitor
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+
+flowable:
+  # 关闭异步，不关闭历史数据的插入就是异步的，会在同一个事物里面，无法回滚
+  # 开发可开启会提高些效率，上线需要关闭
+  async-executor-activate: false
+  database-schema-update: true
+  # common:
+  #   app:
+  #     idm-url: /flowable-ui
+  # idm:
+  #   app:
+  #     admin:
+  #       user-id: admin
+  #       password: test
+  #       first-name: admin
+  #       last-name: admin
+  # rest:
+  #   app:
+  #     authentication-mode: verify-privilege
+  # modeler:
+  #   app:
+  #     rest-enabled: true
+
+##SAPL
+io.sapl.pdp:
+  embedded:
+    pdp-config-type: RESOURCES
+    config-path: /policies
+    policies-path: /policies
+    print-trace: true
+    print-json-report: true
+    print-text-report: true
+    pretty-print-reports: false
+logging.level:
+  "[io.sapl]": DEBUG
+  "[org.springframework]": DEBUG

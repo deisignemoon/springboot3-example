@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.xiacong.exception.RestExceptionHandler,\
+    com.xiacong.exception.rpc.RpcExceptionInterceptorConfig
