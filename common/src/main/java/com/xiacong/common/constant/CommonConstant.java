@@ -8,7 +8,16 @@ package com.xiacong.common.constant;
  * @Created by xiacong
  */
 public class CommonConstant {
+
+    /**
+     * 追踪号
+     */
     public static final String TRACE_ID="traceId";
+
+    /**
+     * 当前用户信息
+     */
+    public static final String CURUSER="CURUSER";
 
 
     /**
