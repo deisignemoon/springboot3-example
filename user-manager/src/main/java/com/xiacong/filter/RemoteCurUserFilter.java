@@ -2,8 +2,6 @@ package com.xiacong.filter;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.xiacong.common.constant.CommonConstant;
-import com.xiacong.model.aggreate.UserAggreate;
-import io.undertow.security.api.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.common.constants.CommonConstants;
@@ -14,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * dubbo请求上下文过滤器
+ *
  * @author xiacong
  */
 @Slf4j
@@ -25,9 +24,9 @@ public class RemoteCurUserFilter implements Filter {
         //判断是消费者  还是 服务提供者
         RpcContext context = RpcContext.getContext();
         if (context.isConsumerSide()) {
-            log.info("dubbo消费端请求{}(地址{})服务{}:{}",context.getRemoteApplicationName()
-                    ,context.getRemoteAddressString()
-                    ,context.getServiceKey()
+            log.info("dubbo消费端请求{}(地址{})服务{}:{}", context.getRemoteApplicationName()
+                    , context.getRemoteAddressString()
+                    , context.getServiceKey()
                     , JSONObject.toJSONString(context.getArguments()));
             //消费者 将用户信息set至上下文中
             Authentication curUser = null;
@@ -43,7 +42,7 @@ public class RemoteCurUserFilter implements Filter {
             }
         } else {
             //获取请求报文
-            log.info("dubbo服务端收到来自{}(地址{}){}的请求:{}",context.getRemoteApplicationName(),
+            log.info("dubbo服务端收到来自{}(地址{}){}的请求:{}", context.getRemoteApplicationName(),
                     context.getRemoteAddressString(),
                     invoker.getInterface(),
                     JSONObject.toJSONString(context.getArguments()));
