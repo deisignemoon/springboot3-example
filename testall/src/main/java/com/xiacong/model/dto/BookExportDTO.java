@@ -1,32 +1,37 @@
-package com.xiacong.model.domain;
+package com.xiacong.model.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 
  * @TableName book
  */
-@TableName(value ="book")
 @Data
-public class Book implements Serializable {
+@Table(name = "书籍表")
+public class BookExportDTO implements Serializable {
     /**
      * 
      */
+    @Column(name = "id")
     private Long id;
 
     /**
      * 
      */
+    @Column(name = "书籍名称")
     private String name;
 
     /**
      * 
      */
+    @Column(name = "年龄限制")
     private Integer ageRating;
 
     @TableField(exist = false)
