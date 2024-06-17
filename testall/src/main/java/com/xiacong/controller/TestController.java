@@ -3,11 +3,11 @@ package com.xiacong.controller;
 
 import com.xiacong.flow.FlowEngine;
 import com.xiacong.flow.common.content.ApplicationContent;
+import com.xiacong.model.dto.TestDTO;
 import com.xiacong.task.LocalTaskExample;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author xiacong
@@ -35,6 +35,11 @@ public class TestController {
         content.setFlowId(flowId);
         ApplicationContent res = flowEngine.startFlow(content);
         return (String) res.getResponse();
+    }
+
+    @PostMapping("/vaild")
+    public String test01(@RequestBody @Validated TestDTO dto) throws Exception {
+        return "hello";
     }
 
 }
