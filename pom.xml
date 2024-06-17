@@ -32,7 +32,7 @@
         <spring-boot.build-image.imageName>springboot3test</spring-boot.build-image.imageName>
         <spring-cloud-dependencies.version>2023.0.0</spring-cloud-dependencies.version>
         <spring-boot-dependencies.version>3.2.5</spring-boot-dependencies.version>
-        <spring-cloud-alibaba.version>2023.0.0.0-RC1</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
         <flowable.version>7.0.0</flowable.version>
         <!--<flowable-ui.version>6.8.1</flowable-ui.version>-->
         <lombok.version>1.18.30</lombok.version>
@@ -59,9 +59,20 @@
         <sapl.version>3.0.0-SNAPSHOT</sapl.version>
         <jackson-datatype-jsr310.version>2.13.0</jackson-datatype-jsr310.version>
         <fst.version>2.43</fst.version>
+        <jakarta.persistence-api.version>3.2.0</jakarta.persistence-api.version>
+        <poi.version>5.2.5</poi.version>
+        <poi-ooxml.version>5.2.5</poi-ooxml.version>
     </properties>
 
     <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
@@ -267,17 +278,22 @@
             <dependency>
                 <groupId>jakarta.persistence</groupId>
                 <artifactId>jakarta.persistence-api</artifactId>
-                <version>3.2.0</version>
+                <version>${jakarta.persistence-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi</artifactId>
-                <version>5.2.5</version>
+                <version>${poi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
-                <version>5.2.5</version>
+                <version>${poi-ooxml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-ai</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

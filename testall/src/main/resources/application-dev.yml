@@ -39,6 +39,11 @@ spring:
   #    type: com.alibaba.druid.pool.DruidDataSource
   #    driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
+    ai:
+      tongyi:
+        chat:
+          options:
+            api-key: sk-9ade27a67d2149339fe26678a647dcb3
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
@@ -93,11 +98,11 @@ spring:
         ##nettyThreads: 32
         ##codec: !<org.redisson.codec.Kryo5Codec> {}
         ##transportMode: "NIO"
-  ai:
-    openai:
-      api-key: sk-OsiCITfyU0X5OR0eNUQCiGtqMzt4ANfGO8nKNsPYuRIyPm9Z
-      ## http://www.aicnn.cn/setting
-      base-url: https://api.aicnn.cn
+  ##ai:
+  ##  openai:
+  ##    api-key: sk-OsiCITfyU0X5OR0eNUQCiGtqMzt4ANfGO8nKNsPYuRIyPm9Z
+  ##    ## http://www.aicnn.cn/setting
+  ##    base-url: https://api.aicnn.cn
 
 ## MyBatis-plus配置
 mybatis-plus:

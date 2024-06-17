@@ -19,14 +19,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
+@RestController("/api/book")
 @Slf4j
 public class BookController {
 
     @Resource
     private BookMapper mapper;
 
-    @GetMapping(value = "/api/books/{pageNum}/{pageSize}", produces = "application/json")
+    @GetMapping(value = "{pageNum}/{pageSize}", produces = "application/json")
     public ResultVO<PageInfo<Book>> findAll(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Book> all = mapper.findAll();
@@ -34,7 +34,7 @@ public class BookController {
         return ResultVO.ok(info);
     }
 
-    @GetMapping(value = "/api/books/{id}", produces = "application/json")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public Book findById(@PathVariable Long id) {
         return mapper.findAllByIdBook(id);
     }
