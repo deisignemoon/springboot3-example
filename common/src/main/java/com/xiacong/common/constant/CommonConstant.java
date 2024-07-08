@@ -24,6 +24,7 @@ public class CommonConstant {
      * 日期格式 yyyyMMdd
      */
     public static final String DATE_FORMATE = "yyyy-MM-dd";
+    public static final String DATE_FORMATE3 = "yyyyMMdd";
 
     /**
      * 日期格式 yyyy-MM-dd AM/PM

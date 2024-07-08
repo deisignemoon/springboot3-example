@@ -1,6 +1,7 @@
 package com.xiacong.task;
 
 import cn.hutool.core.date.StopWatch;
+import com.xiacong.util.CycleSeqNumUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.AopContext;
@@ -27,6 +28,8 @@ public class LocalTaskExample {
 
     @Resource(name = "controlAsync")
     private Executor executor;
+    @Resource
+    private CycleSeqNumUtil cycleSeqNumUtil;
 
     public void testMDC() throws Exception {
         log.info("MDC OUT method has been called {}", Thread.currentThread());
@@ -74,6 +77,7 @@ public class LocalTaskExample {
     @Scheduled(cron = "0/1 * * * * ?")
     @Async("controlAsync")
     public void testMDC2() {
-        //log.info("MDC-schedule method has been called {}", Thread.currentThread());
+        String cycleSeqNum = cycleSeqNumUtil.getCycleSeqNum();
+        log.info("序列号，{}",cycleSeqNum);
     }
 }
