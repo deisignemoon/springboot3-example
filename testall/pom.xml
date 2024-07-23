@@ -40,10 +40,10 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--flowable-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-spring-boot-starter</artifactId>
-        </dependency>-->
+        </dependency>
 <!--        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-ai</artifactId>

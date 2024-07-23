@@ -2,16 +2,20 @@ package com.xiacong.util;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Snowflake;
+import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.RAtomicLong;
 import org.redisson.api.RedissonClient;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author xiacong
@@ -55,5 +59,40 @@ public class DateTest {
     public void test02() {
         LocalDate localDate = Instant.ofEpochMilli((100L) + Snowflake.DEFAULT_TWEPOCH).atZone(ZoneId.systemDefault()).toLocalDate();
         System.out.println(localDate);
+    }
+
+    @Data
+    class TestObj {
+        private String name;
+        private LocalDateTime date;
+
+        public TestObj(String name, LocalDateTime date) {
+            this.name = name;
+            this.date = date;
+        }
+    }
+
+    @Test
+    public void test03() {
+        LocalDateTime now = LocalDateTime.now();
+        List<TestObj> list = new ArrayList<>();
+        list.add(new TestObj("a1",now.plusMinutes(30L)));
+        list.add(new TestObj("a2",now.plusMinutes(31L)));
+        list.add(new TestObj("a3",now.plusMinutes(45L)));
+        list.add(new TestObj("a4",now.plusMinutes(66L)));
+        Map<LocalDateTime, List<TestObj>> collect = list.stream().collect(Collectors.groupingBy(data -> data.getDate().truncatedTo(ChronoUnit.HOURS)));
+        System.out.println(collect);
+        Date date = new Date();
+        ZonedDateTime time1 = ZonedDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault());
+        ZonedDateTime time2 = ZonedDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault());
+        System.out.println(time1);
+        System.out.println(time2);
+        System.out.println(time1.equals(time2));
+        System.out.println(time1.hashCode());
+        System.out.println(time2.hashCode());
+    }
+
+    private ZonedDateTime convertDateToTime(Date date) {
+        return ZonedDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault());
     }
 }

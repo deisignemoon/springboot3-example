@@ -62,6 +62,7 @@
         <jakarta.persistence-api.version>3.2.0</jakarta.persistence-api.version>
         <poi.version>5.2.5</poi.version>
         <poi-ooxml.version>5.2.5</poi-ooxml.version>
+        <zxing.core.version>3.4.0</zxing.core.version>
     </properties>
 
     <repositories>
@@ -290,11 +291,17 @@
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi-ooxml.version}</version>
             </dependency>
-<!--            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-ai</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-            </dependency>-->
+            <!--            <dependency>
+                            <groupId>com.alibaba.cloud</groupId>
+                            <artifactId>spring-cloud-starter-alibaba-ai</artifactId>
+                            <version>${spring-cloud-alibaba.version}</version>
+                        </dependency>-->
+            <!--            二维码支持-->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.core.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
