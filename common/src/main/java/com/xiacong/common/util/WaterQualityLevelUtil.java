@@ -71,7 +71,7 @@ public class WaterQualityLevelUtil {
 
     public static Integer checkWaterQualityLevel(String parameterName, BigDecimal value) {
         if (!qualityLevels.containsKey(parameterName)) {
-            throw new IllegalArgumentException("Unknown parameter name: " + parameterName);
+            return  0;
         }
         Boolean big = bigger.get(parameterName);
         List<BigDecimal> levelList = qualityLevels.get(parameterName);

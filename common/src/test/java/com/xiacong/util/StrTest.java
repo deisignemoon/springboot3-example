@@ -161,4 +161,29 @@ public class StrTest {
         System.out.println(set.size());
         System.out.println(set);
     }
+
+    @Test
+    public void test11(){
+        AA aa = new AA();
+        aa.setAge("1");
+        aa.setName("asf");
+        BB bb = new BB();
+        bb.setPrice("25");
+        bb.setBookname("<>");
+        aa.setBb(bb);
+        String jsonString = JSONObject.toJSONString(aa);
+        System.out.println(jsonString);
+    }
+    @Test
+    public void test12(){
+        List<AA> list =new ArrayList<>();
+        list.add(new AA("aa","20",null));
+        list.add(new AA("bb","20",null));
+        list.add(new AA("cc","20",null));
+        list.add(new AA("aa","20",null));
+        list.add(new AA(null,"20",null));
+        list.add(new AA("","20",null));
+        Map<String, List<AA>> collect = list.stream().filter( b -> StringUtils.isNotBlank(b.getName())).collect(Collectors.groupingBy(AA::getName));
+        System.out.println(collect);
+    }
 }
