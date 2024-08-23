@@ -57,7 +57,7 @@ spring:
       # yaml中 | 表示多行文本块
       config: |
         singleServerConfig:
-          password: ssrredis!!!
+          password: ningzaichun
           address: redis://192.168.197.100:6379
           database: 0
           connectTimeout: 10000

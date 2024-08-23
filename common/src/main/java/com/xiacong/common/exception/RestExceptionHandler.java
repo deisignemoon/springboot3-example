@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
@@ -39,11 +38,11 @@ public class RestExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(DataAccessException.class)
+    /*@ExceptionHandler(DataAccessException.class)
     public ResultVO<Object> handleSqlException(DataAccessException e) {
         log.error("sql异常", e);
         return ResultVO.failed(SystemCodeInfo.DATABASE_ERROR.getCode(), SystemCodeInfo.DATABASE_ERROR.getCnMsg());
-    }
+    }*/
 
     /**
      * 未能捕获的异常
