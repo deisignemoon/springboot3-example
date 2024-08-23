@@ -2,6 +2,7 @@ package com.xiacong.config;
 
 import com.xiacong.filter.JwtAuthenticationFilter;
 import com.xiacong.handler.*;
+import com.xiacong.validation.AuthIgnoreConfig;
 import io.sapl.spring.config.EnableSaplMethodSecurity;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
@@ -18,10 +19,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.util.pattern.PathPatternParser;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +34,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 public class SecurityConfiguration {
 
-    private static final String[] URL_WHITELIST = {"/login/login", "/favicon.ico"};
+    private static String[] URL_WHITELIST = {"/login/login", "/favicon.ico"};
 
     @Resource
     private JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -45,6 +50,8 @@ public class SecurityConfiguration {
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Resource
     private AuthenticationProvider authenticationProvider;
+    @Resource
+    private AuthIgnoreConfig authIgnoreConfig;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -79,6 +86,14 @@ public class SecurityConfiguration {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        List<String> ignoreUrls = authIgnoreConfig.getIgnoreUrls();
+        if (!CollectionUtils.isEmpty(ignoreUrls)) {
+            String[] newArray = new String[URL_WHITELIST.length + ignoreUrls.size()];
+            System.arraycopy(URL_WHITELIST, 0, newArray, 0, URL_WHITELIST.length);
+            //ignoreUrls转为数组
+            System.arraycopy(ignoreUrls.toArray(new String[0]), 0, newArray, URL_WHITELIST.length, ignoreUrls.size());
+            URL_WHITELIST = newArray;
+        }
         http
                 // 禁用csrf(防止跨站请求伪造攻击)
                 .csrf(AbstractHttpConfigurer::disable)
