@@ -19,7 +19,6 @@ public class Account implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**

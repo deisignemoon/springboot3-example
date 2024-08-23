@@ -20,4 +20,8 @@
         amt,create_by,modify_by,
         create_time,modify_time
     </sql>
+    <insert id="saveByParam">
+        insert into posting_flow (account_src,account_dest,amt)
+        values (#{accountSrc},#{accountDest},#{amt})
+    </insert>
 </mapper>

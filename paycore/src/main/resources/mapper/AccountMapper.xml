@@ -21,4 +21,16 @@
         account_type,over,create_by,
         create_time,modify_by,modify_time
     </sql>
+    <select id="queryAllByAccountNo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from account
+        where
+        account_no = #{accountNo,jdbcType=VARCHAR}
+    </select>
+    <update id="updateOverByAccountNo">
+        update account
+        set over = #{over}
+        where account_no = #{accountNo,jdbcType=VARCHAR}
+    </update>
 </mapper>

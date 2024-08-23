@@ -2,6 +2,9 @@ package com.xiacong.mapper;
 
 import com.xiacong.model.domain.PostingFlow;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.math.BigDecimal;
 
 /**
 * @author 您好
@@ -10,7 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.xiacong.model.domain.PostingFlow
 */
 public interface PostingFlowMapper extends BaseMapper<PostingFlow> {
-
+    int saveByParam(@Param("amt") BigDecimal amt, @Param("accountSrc") String accountSrc,@Param("accountDest") String accountDest);
 }
 
 
