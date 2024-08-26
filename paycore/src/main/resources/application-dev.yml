@@ -45,7 +45,7 @@ dubbo:
   application:
     name: ${spring.application.name}
   provider: &dubbocofig
-    filter: traceId,curuser
+    filter: traceId
     check: false
     retries: 0
     timeout: 10000

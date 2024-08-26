@@ -13,5 +13,5 @@ import com.xiacong.common.result.ResultVO;
  * @Created by xiacong
  */
 public interface IModelCallback {
-    ResultVO<String> callback(RequestDTO dto);
+    ResultVO<String> callback(RequestDTO<String> dto);
 }

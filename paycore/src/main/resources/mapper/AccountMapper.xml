@@ -33,4 +33,9 @@
         set over = #{over}
         where account_no = #{accountNo,jdbcType=VARCHAR}
     </update>
+    <update id="debitOverByAccountNo">
+        update account
+        set over = over + #{over}
+        where account_no = #{accountNo,jdbcType=VARCHAR}
+    </update>
 </mapper>

@@ -16,6 +16,7 @@ public interface AccountMapper extends BaseMapper<Account> {
     Account queryAllByAccountNo(@Param("accountNo") String accountNo);
 
     int updateOverByAccountNo(@Param("over") BigDecimal over, @Param("accountNo") String accountNo);
+    int debitOverByAccountNo(@Param("over") BigDecimal over, @Param("accountNo") String accountNo);
 }
 
 
