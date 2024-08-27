@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.CollectionUtils;
 
-import javax.imageio.ImageIO;
+import jakarta.imageio.ImageIO;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
@@ -91,7 +91,12 @@ public class QrCodeHandler {
 
     @Test
     public void test() {
-        InputStream handel = new QrCodeHandler().handel(new QrCodeInfoDTO("null" + "\n" + " abc", "123", "POST", "/aaa/ddd", "null", null));
+        InputStream handel = new QrCodeHandler().handel(new QrCodeInfoDTO(
+                """
+                         aaa
+                         bbb
+                         ccc
+                         """, "123", "POST", "/aaa/ddd", "null", null));
         //输入流转为文件流并保存
         FileUtil.writeFromStream(handel, "D:\\code\\springboot3-example\\common\\src\\test\\resources\\file\\test.png");
     }
