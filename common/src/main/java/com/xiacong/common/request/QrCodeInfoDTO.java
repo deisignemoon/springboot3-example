@@ -24,4 +24,15 @@ public class QrCodeInfoDTO {
 
     private String params;
 
+    public QrCodeInfoDTO() {
+    }
+
+    public QrCodeInfoDTO(String name, String no, String route, String method, String uri, String params) {
+        this.name = name;
+        this.no = no;
+        this.route = route;
+        this.method = method;
+        this.uri = uri;
+        this.params = params;
+    }
 }

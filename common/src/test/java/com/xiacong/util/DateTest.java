@@ -4,8 +4,6 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Snowflake;
 import lombok.Data;
 import org.junit.jupiter.api.Test;
-import org.redisson.api.RAtomicLong;
-import org.redisson.api.RedissonClient;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -45,15 +43,15 @@ public class DateTest {
     }
 
     //@Resource
-    private RedissonClient redissonClient;
-
-    @Test
-    void contextLoads() {
-        redissonClient.getBucket("hello").set("{\"aa\":\"bb\"}");
-        String test = (String) redissonClient.getBucket("hello").get();
-        System.out.println(test);
-        RAtomicLong seqCount = redissonClient.getAtomicLong("SeqCount");
-    }
+    //private RedissonClient redissonClient;
+//
+    //@Test
+    //void contextLoads() {
+    //    redissonClient.getBucket("hello").set("{\"aa\":\"bb\"}");
+    //    String test = (String) redissonClient.getBucket("hello").get();
+    //    System.out.println(test);
+    //    RAtomicLong seqCount = redissonClient.getAtomicLong("SeqCount");
+    //}
 
     @Test
     public void test02() {
@@ -76,10 +74,10 @@ public class DateTest {
     public void test03() {
         LocalDateTime now = LocalDateTime.now();
         List<TestObj> list = new ArrayList<>();
-        list.add(new TestObj("a1",now.plusMinutes(30L)));
-        list.add(new TestObj("a2",now.plusMinutes(31L)));
-        list.add(new TestObj("a3",now.plusMinutes(45L)));
-        list.add(new TestObj("a4",now.plusMinutes(66L)));
+        list.add(new TestObj("a1", now.plusMinutes(30L)));
+        list.add(new TestObj("a2", now.plusMinutes(31L)));
+        list.add(new TestObj("a3", now.plusMinutes(45L)));
+        list.add(new TestObj("a4", now.plusMinutes(66L)));
         Map<LocalDateTime, List<TestObj>> collect = list.stream().collect(Collectors.groupingBy(data -> data.getDate().truncatedTo(ChronoUnit.HOURS)));
         System.out.println(collect);
         Date date = new Date();

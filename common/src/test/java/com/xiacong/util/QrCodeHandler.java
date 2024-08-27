@@ -1,5 +1,6 @@
-package com.xiacong.common.util;
+package com.xiacong.util;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import cn.hutool.extra.qrcode.QrConfig;
 import com.alibaba.fastjson2.JSONObject;
@@ -7,11 +8,13 @@ import com.xiacong.common.exception.ServiceException;
 import com.xiacong.common.request.QrCodeInfoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.CollectionUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,16 +24,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author xiacong
- * @Classname QrCodeHandler
- * @Version 1.0.0
- * @Date 2024/7/2 14:04
- * @Created by xiacong
- */
-@Component
+
 @Slf4j
 public class QrCodeHandler {
+
 
     public InputStream handel(QrCodeInfoDTO dto) {
         QrConfig qrConfig = QrConfig.create();
@@ -48,7 +45,7 @@ public class QrCodeHandler {
                 int size = 10;
                 // 文本位置调整，假设放在二维码下方居中
                 int centerX = (combinedImage.getWidth() - size) / 2;
-                int centerY = combinedImage.getHeight() - size;
+                int centerY = combinedImage.getHeight()-size;
                 drawText(combinedImage, name, size, centerX, centerY);
                 ImageIO.write(combinedImage, "png", os);
             } else {
@@ -90,5 +87,12 @@ public class QrCodeHandler {
             }
         }
         return map;
+    }
+
+    @Test
+    public void test() {
+        InputStream handel = new QrCodeHandler().handel(new QrCodeInfoDTO("null" + "\n" + " abc", "123", "POST", "/aaa/ddd", "null", null));
+        //输入流转为文件流并保存
+        FileUtil.writeFromStream(handel, "D:\\code\\springboot3-example\\common\\src\\test\\resources\\file\\test.png");
     }
 }
