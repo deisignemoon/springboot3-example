@@ -193,6 +193,7 @@
 			executor_block_strategy = #{executorBlockStrategy},
 			executor_timeout = ${executorTimeout},
 			executor_fail_retry_count = ${executorFailRetryCount},
+			executor_count = ${executorCount},
 			glue_type = #{glueType},
 			glue_source = #{glueSource},
 			glue_remark = #{glueRemark},
