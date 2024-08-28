@@ -30,7 +30,8 @@ public class XxlJobInfo {
 	private String executorBlockStrategy;	// 阻塞处理策略
 	private int executorTimeout;     		// 任务执行超时时间，单位秒
 	private int executorFailRetryCount;		// 失败重试次数
-	
+
+	private int executorCount;		// job执行次数
 	private String glueType;		// GLUE类型	#com.xxl.job.core.glue.GlueTypeEnum
 	private String glueSource;		// GLUE源代码
 	private String glueRemark;		// GLUE备注
@@ -234,4 +235,12 @@ public class XxlJobInfo {
 	public void setTriggerNextTime(long triggerNextTime) {
 		this.triggerNextTime = triggerNextTime;
 	}
+	public int getExecutorCount() {
+		return executorCount;
+	}
+
+	public void setExecutorCount(int executorCount) {
+		this.executorCount = executorCount;
+	}
+
 }

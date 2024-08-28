@@ -66,3 +66,16 @@ dubbo:
 log:
   level: debug
   path: /home/moe/logs
+
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:8080/xxl-job-admin
+    accessToken: default_token
+    executor:
+      appname: ${spring.application.name}
+      ip:
+      address:
+      port: 9999
+      logpath:
+      logretentiondays: 7

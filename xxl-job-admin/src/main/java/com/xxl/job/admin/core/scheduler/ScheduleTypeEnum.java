@@ -20,6 +20,11 @@ public enum ScheduleTypeEnum {
     FIX_RATE(I18nUtil.getString("schedule_type_fix_rate")),
 
     /**
+     * 阶梯自定义
+     */
+    SIGN_RATE("sign_rate"),
+
+    /**
      * schedule by fix delay (in seconds)， after the last time
      */
     /*FIX_DELAY(I18nUtil.getString("schedule_type_fix_delay"))*/;
