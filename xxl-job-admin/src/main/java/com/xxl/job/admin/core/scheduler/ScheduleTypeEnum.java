@@ -22,7 +22,7 @@ public enum ScheduleTypeEnum {
     /**
      * 阶梯自定义
      */
-    SIGN_RATE("sign_rate"),
+    SIGN_RATE(I18nUtil.getString("schedule_type_sign_rate")),
 
     /**
      * schedule by fix delay (in seconds)， after the last time
