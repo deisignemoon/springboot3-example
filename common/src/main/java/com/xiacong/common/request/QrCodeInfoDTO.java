@@ -2,6 +2,8 @@ package com.xiacong.common.request;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author xiacong
  * @Classname QrCodeInfoDTO
@@ -11,6 +13,8 @@ import lombok.Data;
  */
 @Data
 public class QrCodeInfoDTO {
+
+    private Integer id;
 
     private String name;
 
@@ -23,6 +27,8 @@ public class QrCodeInfoDTO {
     private String uri;
 
     private String params;
+
+    private List<String> drawText;
 
     public QrCodeInfoDTO() {
     }

@@ -552,6 +552,8 @@ $(function() {
 			$("#updateModal .form input[name='schedule_conf_FIX_RATE']").val( row.scheduleConf );
 		} else if (row.scheduleType == 'FIX_DELAY') {
 			$("#updateModal .form input[name='schedule_conf_FIX_DELAY']").val( row.scheduleConf );
+		} else if (row.scheduleType == 'SIGN_DELAY') {
+			$("#updateModal .form input[name='schedule_conf_SIGN_RATE']").val( row.scheduleConf );
 		}
 
 		// 》init scheduleType

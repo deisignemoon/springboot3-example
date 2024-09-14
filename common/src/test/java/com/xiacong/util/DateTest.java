@@ -2,7 +2,9 @@ package com.xiacong.util;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Snowflake;
+import com.xiacong.common.util.TimeUtils;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -78,6 +80,8 @@ public class DateTest {
         list.add(new TestObj("a2", now.plusMinutes(31L)));
         list.add(new TestObj("a3", now.plusMinutes(45L)));
         list.add(new TestObj("a4", now.plusMinutes(66L)));
+        boolean match = list.stream().anyMatch(l -> StringUtils.isBlank(l.getName()));
+        System.out.println(match);
         Map<LocalDateTime, List<TestObj>> collect = list.stream().collect(Collectors.groupingBy(data -> data.getDate().truncatedTo(ChronoUnit.HOURS)));
         System.out.println(collect);
         Date date = new Date();
@@ -93,4 +97,11 @@ public class DateTest {
     private ZonedDateTime convertDateToTime(Date date) {
         return ZonedDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault());
     }
+
+    @Test
+    public void test04() {
+        String s = TimeUtils.calculateTimeDifference(LocalDateTime.now(), LocalDateTime.of(2024, 10, 22, 12, 5, 10));
+        System.out.println(s);
+    }
+
 }
