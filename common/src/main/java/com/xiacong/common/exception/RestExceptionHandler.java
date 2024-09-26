@@ -1,6 +1,7 @@
 
 package com.xiacong.common.exception;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.xiacong.common.result.ResultVO;
 import lombok.extern.slf4j.Slf4j;
@@ -92,13 +93,17 @@ public class RestExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResultVO<Object> handleError(HttpMessageNotReadableException e) {
         log.error("消息不能读取:{}", e.getMessage());
-        String fieldName = "";
+        String errorInfo = "";
         try {
-            fieldName = ((MismatchedInputException) e.getCause()).getPath().get(0).getFieldName();
+            String fieldName = ((MismatchedInputException) e.getCause()).getPath().get(0).getFieldName();
+            errorInfo = fieldName + SystemCodeInfo.MSG_NOT_READABLE.getCnMsg();
+            if (null != e.getRootCause()) {
+                errorInfo = UserTipGenerator.getUserMessage2((InvalidFormatException) e.getRootCause());
+            }
         } catch (Exception ex) {
             log.error("消息无法读取异常处理，获取字段名失败");
         }
-        return ResultVO.failed(SystemCodeInfo.MSG_NOT_READABLE.getCode(), fieldName + SystemCodeInfo.MSG_NOT_READABLE.getCnMsg());
+        return ResultVO.failed(SystemCodeInfo.MSG_NOT_READABLE.getCode(), errorInfo);
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
