@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -102,6 +103,16 @@ public class DateTest {
     public void test04() {
         String s = TimeUtils.calculateTimeDifference(LocalDateTime.now(), LocalDateTime.of(2024, 10, 22, 12, 5, 10));
         System.out.println(s);
+    }
+    @Test
+    public void test05() {
+        System.out.println(LocalDateTime.MIN);
+        System.out.println(LocalDateTime.MAX);
+        //月末 23:59:59
+        LocalDateTime day = LocalDate.of(2024, 1, 1).atStartOfDay();
+        LocalDateTime time = LocalDate.of(2024, 12, 1).with(TemporalAdjusters.lastDayOfMonth()).atTime(23, 59, 59);
+        System.out.println(day);
+        System.out.println(time);
     }
 
 }
