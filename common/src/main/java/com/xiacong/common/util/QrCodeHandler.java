@@ -47,9 +47,12 @@ public class QrCodeHandler {
                 g2d.dispose();
                 int size = 10;
                 // 文本位置调整，假设放在二维码下方居中
-                int centerX = (combinedImage.getWidth() - size) / 2;
-                int centerY = combinedImage.getHeight() - size;
-                drawText(combinedImage, name, size, centerX, centerY);
+                int centerX = combinedImage.getWidth();
+                List<String> drawText = dto.getDrawText();
+                for (int i = 0; i < drawText.size(); i++) {
+                    int centerY = combinedImage.getHeight() - size * (i + 1);
+                    drawText(combinedImage, drawText.get(i), size, centerX, centerY);
+                }
                 ImageIO.write(combinedImage, "png", os);
             } else {
                 ImageIO.write(bufferedImage, "png", os);
@@ -65,13 +68,14 @@ public class QrCodeHandler {
     private void drawText(BufferedImage combinedImage, String text, int size, int x, int y) {
         Graphics2D g2d = combinedImage.createGraphics();
         // 添加头信息文字
-        Font font = new Font("UTF-8", Font.PLAIN, size); // 自定义字体和大小
+        Font font = new Font("SimSun", Font.PLAIN, size); // 自定义字体和大小
         g2d.setFont(font);
         g2d.setColor(Color.BLACK); // 文字颜色
-        // 计算文本的宽度和高度
-        //FontRenderContext context = g2d.getFontRenderContext();
-        // 绘制文本
-        g2d.drawString(text, x, y);
+        // 计算文字宽度以实现居中
+        FontMetrics metrics = g2d.getFontMetrics();
+        int textWidth = metrics.stringWidth(text);
+        int centerX = (x - textWidth) / 2;
+        g2d.drawString(text, centerX, y);
         // 清理并关闭Graphics2D
         g2d.dispose();
     }
