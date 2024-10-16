@@ -33,7 +33,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.build-image.imageName>springboot3test</spring-boot.build-image.imageName>
         <spring-cloud-dependencies.version>2023.0.3</spring-cloud-dependencies.version>
-        <spring-boot-dependencies.version>3.3.3</spring-boot-dependencies.version>
+        <spring-boot-dependencies.version>3.3.4</spring-boot-dependencies.version>
         <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
         <flowable.version>7.0.0</flowable.version>
         <!--<flowable-ui.version>6.8.1</flowable-ui.version>-->
