@@ -11,6 +11,8 @@ import com.xiacong.service.SysUsrRoleService;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
+import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.NullRoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
@@ -74,16 +76,23 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
         if (CollectionUtils.isEmpty(roles)) {
             return new NullRoleHierarchy();
         }
-        StringBuilder sb = new StringBuilder();
+        RoleHierarchyImpl.Builder builder = RoleHierarchyImpl.withDefaultRolePrefix();
         roles.forEach(role -> {
             String roleCode = role.getRoleCode();
             String parentRoleNo = role.getParentRoleNo();
             if (StringUtils.isBlank(parentRoleNo)) {
                 return;
             }
-            sb.append("ROLE_").append(parentRoleNo).append(" > ROLE_").append(roleCode).append("\n");
+            builder.role(parentRoleNo).implies(roleCode);
         });
-        return RoleHierarchyImpl.fromHierarchy(sb.toString());
+        return builder.build();
+    }
+
+    @Bean
+    MethodSecurityExpressionHandler methodSecurityExpressionHandler(RoleHierarchy roleHierarchy) {
+        DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
+        expressionHandler.setRoleHierarchy(roleHierarchy);
+        return expressionHandler;
     }
 }
 
