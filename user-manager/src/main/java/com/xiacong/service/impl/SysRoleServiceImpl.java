@@ -10,6 +10,10 @@ import com.xiacong.service.SysRoleService;
 import com.xiacong.service.SysUsrRoleService;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.access.hierarchicalroles.NullRoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -52,12 +56,34 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
         if (StringUtils.isBlank(usrNo)) {
             return new ArrayList<>();
         }
-        List<SysUsrRole> usrRoles=usrRoleService.getUsrRolesByUsrNo(usrNo);
+        List<SysUsrRole> usrRoles = usrRoleService.getUsrRolesByUsrNo(usrNo);
         if (CollectionUtils.isEmpty(usrRoles)) {
             return new ArrayList<>();
         }
         List<String> roleCodes = usrRoles.stream().map(SysUsrRole::getRoleCode).toList();
         return mapper.selectAllByRoleCodes(roleCodes);
+    }
+
+    /**
+     * 配置角色继承关系
+     * @return
+     */
+    @Bean
+    RoleHierarchy roleHierarchy() {
+        List<SysRole> roles = mapper.selectAllByDelStatus(0);
+        if (CollectionUtils.isEmpty(roles)) {
+            return new NullRoleHierarchy();
+        }
+        StringBuilder sb = new StringBuilder();
+        roles.forEach(role -> {
+            String roleCode = role.getRoleCode();
+            String parentRoleNo = role.getParentRoleNo();
+            if (StringUtils.isBlank(parentRoleNo)) {
+                return;
+            }
+            sb.append("ROLE_").append(parentRoleNo).append(" > ROLE_").append(roleCode).append("\n");
+        });
+        return RoleHierarchyImpl.fromHierarchy(sb.toString());
     }
 }
 

@@ -33,4 +33,11 @@
             #{item,jdbcType=VARCHAR}
         </foreach>
     </select>
+    <select id="selectAllByDelStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        where
+        del_status = #{delStatus,jdbcType=NUMERIC}
+    </select>
 </mapper>

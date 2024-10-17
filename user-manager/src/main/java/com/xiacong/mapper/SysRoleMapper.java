@@ -14,6 +14,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface SysRoleMapper extends BaseMapper<SysRole> {
     List<SysRole> selectAllByRoleCodes(@Param("roleCodeList") Collection<String> roleCodeList);
+
+    List<SysRole> selectAllByDelStatus(@Param("delStatus") Integer delStatus);
 }
 
 
