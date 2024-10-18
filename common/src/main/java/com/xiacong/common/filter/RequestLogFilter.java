@@ -23,7 +23,7 @@ import java.lang.reflect.Method;
  */
 @Slf4j
 @Order(Integer.MAX_VALUE)
-@WebFilter(filterName = "requestLogFilter", urlPatterns = "/*")
+//@WebFilter(filterName = "requestLogFilter", urlPatterns = "/*")
 public class RequestLogFilter extends OncePerRequestFilter {
     @Resource
     private RequestMappingHandlerMapping handlerMapping;

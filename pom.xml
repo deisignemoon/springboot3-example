@@ -23,6 +23,7 @@
         <module>virtualtable</module>
         <module>app-flow</module>
         <module>xxl-job-admin</module>
+        <module>alibaba-ai</module>
     </modules>
     <packaging>pom</packaging>
 
