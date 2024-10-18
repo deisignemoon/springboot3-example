@@ -4,12 +4,16 @@ package com.xiacong.common.exception;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.xiacong.common.result.ResultVO;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -18,6 +22,10 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.yaml.snakeyaml.constructor.DuplicateKeyException;
+
+import java.nio.file.AccessDeniedException;
+import java.util.Set;
 
 /**
  * 全局异常处理，处理可预见的异常，Order 排序优先级高
@@ -34,16 +42,22 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @RestControllerAdvice
 public class RestExceptionHandler {
     /**
-     * sql异常
-     *
-     * @param e
+     * 幂等异常处理
+     * @param ex
      * @return
      */
-    /*@ExceptionHandler(DataAccessException.class)
-    public ResultVO<Object> handleSqlException(DataAccessException e) {
-        log.error("sql异常", e);
-        return ResultVO.failed(SystemCodeInfo.DATABASE_ERROR.getCode(), SystemCodeInfo.DATABASE_ERROR.getCnMsg());
-    }*/
+    @ExceptionHandler(DuplicateKeyException.class)
+    public ResultVO<Object> exceptionHandler(DuplicateKeyException ex) {
+        log.error(ex.getMessage());
+        String[] split = ex.getMessage().split(" ");
+        for (int i = 0; i < split.length; i++) {
+            if (StringUtils.equals("entry", split[i])) {
+                String msg = split[i + 1] + "已存在";
+                return ResultVO.failed(msg);//将msg传到error里面，以便于报错后提示给客户端
+            }
+        }
+        return ResultVO.failed(SystemCodeInfo.SYSTEM_ERROR.getCode(), "数据库操作失败,请联系管理员");
+    }
 
     /**
      * 未能捕获的异常
@@ -59,11 +73,6 @@ public class RestExceptionHandler {
         log.warn("自定义异常:{}", e.getMessage());
         return ResultVO.failed(String.valueOf(e.getCode()), e.getMsg());
     }
-
-/*    @ExceptionHandler(TokenExpiredException.class)
-    public ResultVO<Object> jwtException(TokenExpiredException e) {
-        return ResultVO.failed(SystemCodeInfo.FAILURE_CODE, e.getMessage());
-    }*/
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResultVO<Object> handleError(MissingServletRequestParameterException e) {
@@ -83,12 +92,6 @@ public class RestExceptionHandler {
         ObjectError objectError = e.getBindingResult().getAllErrors().get(0);
         return ResultVO.failed(SystemCodeInfo.PARAM_BIND_ERROR.getCode(), objectError.getDefaultMessage());
     }
-
-/*    @ExceptionHandler(ConstraintViolationException.class)
-    public ResultVO<Object> handleError(ConstraintViolationException e) {
-        log.warn("参数验证失败:{}", e.getMessage());
-        return handleError(e.getConstraintViolations());
-    }*/
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResultVO<Object> handleError(HttpMessageNotReadableException e) {
@@ -112,11 +115,11 @@ public class RestExceptionHandler {
         return ResultVO.failed(SystemCodeInfo.METHOD_NOT_SUPPORTED.getCode(), SystemCodeInfo.METHOD_NOT_SUPPORTED.getEnMsg());
     }
 
-/*    @ExceptionHandler(AccessDeniedException.class)
+    @ExceptionHandler(AccessDeniedException.class)
     public ResultVO<Object> handleError(AccessDeniedException e) {
         log.error("不支持当前请求方法:{}", e.getMessage());
         return ResultVO.failed(SystemCodeInfo.FUNCTION_NO_PERMISSION.getCode(), SystemCodeInfo.FUNCTION_NO_PERMISSION.getCnMsg());
-    }*/
+    }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public ResultVO<Object> handleError(HttpMediaTypeNotSupportedException e) {
@@ -130,37 +133,5 @@ public class RestExceptionHandler {
         ObjectError objectError = e.getBindingResult().getAllErrors().get(0);
         return ResultVO.failed(SystemCodeInfo.PARAM_BIND_ERROR.getCode(), objectError.getDefaultMessage());
     }
-
-//####################################抽取共性 通用部分代码################################################
-    /*
-
-     */
-/**
- * 处理 BindingResult
- *
- * @param result BindingResult
- * @return Result
- *//*
-
-    protected ResultVO<Object> handleError(BindingResult result) {
-        return ResultVO.failed(SystemCodeInfo.PARAM_BIND_ERROR.getCode(), SystemCodeInfo.PARAM_BIND_ERROR.getEnMsg());
-    }
-
-    */
-/**
- * 处理 ConstraintViolation
- *
- * @param violations 校验结果
- * @return Result
- *//*
-
-    protected ResultVO<Object> handleError(Set<ConstraintViolation<?>> violations) {
-        ConstraintViolation<?> violation = violations.iterator().next();
-        String path = ((PathImpl) violation.getPropertyPath()).getLeafNode().getName();
-        String message = String.format("%s:%s", path, violation.getMessage());
-        return ResultVO.failed(SystemCodeInfo.PARAM_VALID_ERROR.getCode(), message);
-    }
-*/
-
 
 }

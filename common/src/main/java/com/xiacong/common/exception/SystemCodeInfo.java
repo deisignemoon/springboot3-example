@@ -28,6 +28,7 @@ public enum SystemCodeInfo {
     FLOW_NODE_RUN_ERROR("A010009", "流程节点运行异常", "flow_node_run_error"),
     CONTENT_NULL_ERROR("A010010", "上下文为空异常", "content_null_error"),
     Condition_EXPRESS_PRECESS_ERROR("A010011", "条件判断发生异常", "condition_express_precess_error"),
+    FUNCTION_NO_PERMISSION("A010012", "暂无此权限，请联系管理员开通", "no permission "),
     ;
     /**
      * code编码
