@@ -1,6 +1,7 @@
 package com.xiacong.controller;
 
 
+import com.xiacong.cache.impl.CacheManagerRegister;
 import com.xiacong.service.IVirtualTableService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class VirtualTableController {
 
     @Resource
-    private IVirtualTableService virtualTableService;
+    private CacheManagerRegister cacheManagerRegister;
 
-    @GetMapping("/all")
-    public String getVirtualTables(){
-        String all=virtualTableService.getAll();
-        return all;
+    /**
+     * 刷新缓存
+     */
+    @GetMapping("/refersh/all")
+    public void refershAll() {
+        cacheManagerRegister.refershAll();
     }
 
 }
