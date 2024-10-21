@@ -24,6 +24,7 @@
         <module>app-flow</module>
         <module>xxl-job-admin</module>
         <module>alibaba-ai</module>
+        <module>nacos-dubbo</module>
     </modules>
     <packaging>pom</packaging>
 

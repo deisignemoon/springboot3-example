@@ -1,5 +1,5 @@
 
-package com.xiacong.common.filter;
+package com.xiacong.dubbo.filter;
 
 import com.xiacong.common.constant.CommonConstant;
 import com.xiacong.common.util.TraceIdUtil;

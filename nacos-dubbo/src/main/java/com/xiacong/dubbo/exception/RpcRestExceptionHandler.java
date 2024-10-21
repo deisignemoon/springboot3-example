@@ -1,4 +1,4 @@
-package com.xiacong.common.exception.rpc;
+package com.xiacong.dubbo.exception;
 
 
 import com.xiacong.common.exception.ServiceException;
