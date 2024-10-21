@@ -1,6 +1,5 @@
 package com.xiacong.dubbo.exception;
 
-import com.xiacong.common.exception.rpc.RpcRestExceptionHandler;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.context.annotation.Bean;
