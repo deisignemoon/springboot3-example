@@ -74,8 +74,8 @@ xxl:
     accessToken: default_token
     executor:
       appname: ${spring.application.name}
-      ip:
-      address:
-      port: 9999
-      logpath:
+      ip: ''
+      address: ''
+      port: ${server.port}
+      logpath: ''
       logretentiondays: 7

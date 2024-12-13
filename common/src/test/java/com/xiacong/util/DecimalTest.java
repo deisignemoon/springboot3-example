@@ -32,4 +32,10 @@ public class DecimalTest {
         list.add("89.98");
         System.out.println(list.toArray());
     }
+
+    @Test
+    public void test03(){
+        BigDecimal bigDecimal = new BigDecimal("20.36");
+        System.out.println(bigDecimal.setScale(0, BigDecimal.ROUND_HALF_UP));
+    }
 }

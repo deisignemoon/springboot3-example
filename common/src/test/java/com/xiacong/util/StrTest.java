@@ -1,5 +1,7 @@
 package com.xiacong.util;
 
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
 import com.alibaba.fastjson2.JSONObject;
 import com.ql.util.express.DefaultContext;
 import com.ql.util.express.ExpressRunner;
@@ -204,5 +206,22 @@ public class StrTest {
                 throw new RuntimeException(e);
             }
         } while (count < 5);
+    }
+    @Test
+    public void rsaTest(){
+        String data="kk123456";
+        String publicKey="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqzbSXVXjoMwQCSYNnkUz+pHvoJWW2B51YaYJ84+1JjsUUFK5rQTDxvCc7ROKlD4GNC3QQkRyNaoWWWUYwJxFKy803UDv9ERSU0gv/nVKO45B/v9nTEFkfR3bizF8J10OwA7llv6aK8sOnet8Z5fSdZYL/+y21gpd6IWYigdK+/3UGT40gljRyKRISVA05bnhZLWLwDmCF/RzS48aTQVA2MhIjXwNdAbXTgGEL6Ym/D2FQwBBDAIWxl1+WPQqGgZWe3xbSSlc9Wt+m8qD62SvABxzki7zuSA1qX6JymyoGusnE5//Te66VJHtbhWtDeB7SCKx2rffst1kF1j7EbSL1QIDAQAB";
+        RSA rsa = new RSA(null,publicKey);
+        String s = rsa.encryptBase64(data, KeyType.PublicKey);
+        System.out.println(s);
+    }
+
+    @Test
+    public void splitTest(){
+        String str = "1,2,,3,4,,5";
+        String[] split = StringUtils.splitByWholeSeparator(str, ",,");
+        for (String s : split) {
+            System.out.println(s);
+        }
     }
 }
