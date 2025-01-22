@@ -2,7 +2,6 @@ package com.xiacong.util;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Data;
-import org.springframework.boot.test.autoconfigure.data.cassandra.DataCassandraTest;
 
 /**
  *
@@ -15,10 +14,10 @@ import org.springframework.boot.test.autoconfigure.data.cassandra.DataCassandraT
  */
 @Data
 public class AA {
-@JSONField(name = "Name")
+    //@JSONField(name = "Name")
     private String Name;
     private String Age;
-    @JSONField(name = "Bb")
+    //@JSONField(name = "Bb")
     private BB Bb;
 
     public AA() {

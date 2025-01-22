@@ -49,16 +49,13 @@
             <groupId>org.flowable</groupId>
             <artifactId>flowable-spring-boot-starter</artifactId>
         </dependency>
-<!--        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-ai</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-simple</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>-->
+        <dependency>
+            <groupId>com.dm</groupId>
+            <artifactId>DmJdbcDriver11</artifactId>
+            <version>11</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/lib/DmJdbcDriver11.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @Data
 public class BB {
-    @JSONField(name = "Bookname")
+    //@JSONField(name = "Bookname")
     private String Bookname;
     private String Price;
 }

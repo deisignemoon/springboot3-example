@@ -1,1 +1,1 @@
-traceId=com.xiacong.common.filter.RemoteTraceIdFilter
+traceId=com.xiacong.dubbo.filter.RemoteTraceIdFilter
