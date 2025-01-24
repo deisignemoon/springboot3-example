@@ -1,0 +1,10 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: mq-provider
+  rabbitmq:
+    host: 192.168.197.100
+    port: 5672
+    username: root
+    password: root

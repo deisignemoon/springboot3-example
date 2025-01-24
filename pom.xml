@@ -25,6 +25,7 @@
         <module>xxl-job-admin</module>
         <module>alibaba-ai</module>
         <module>nacos-dubbo</module>
+        <module>mq-provider</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -68,6 +69,7 @@
         <poi-ooxml.version>5.2.5</poi-ooxml.version>
         <zxing.core.version>3.4.0</zxing.core.version>
         <xxl-job.version>2.4.1</xxl-job.version>
+        <spring-boot-amqp.version>3.4.1</spring-boot-amqp.version>
     </properties>
 
     <repositories>
@@ -312,6 +314,12 @@
                 <groupId>com.xuxueli</groupId>
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl-job.version}</version>
+            </dependency>
+            <!--rabbitmq-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${spring-boot-amqp.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
