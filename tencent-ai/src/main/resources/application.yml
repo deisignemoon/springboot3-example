@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: tencent-ai
+tencent:
+  cloud:
+    lke:
+      sseurl: https://wss.lke.cloud.tencent.com/v1/qbot/chat/sse
+      appkey: 1**********************
+      secretid: 1**********************
+      secretkey: 1**********************

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -25,5 +26,16 @@ public class StreamTest {
         System.out.println(updateIds);
 
         System.out.println(System.currentTimeMillis());
+    }
+
+    @Test
+    public void test02(){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("123");
+        list.add(new String("123"));
+        list.add(new String("123"));
+        list.add("123");
+        Set<String> strSet = list.stream().collect(Collectors.toSet());
+        System.out.println(strSet);
     }
 }

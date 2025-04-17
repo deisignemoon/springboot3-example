@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiacong.mapper.SysGroupMapper">
+
+    <resultMap id="BaseResultMap" type="com.xiacong.util.IsShipSeatClassCache">
+            <id property="id" column="ID"/>
+            <id property="lineId" column="LINE_ID"/>
+            <id property="ticketType" column="TICKET_TYPE"/>
+            <id property="classNum" column="CLASS_NUM"/>
+            <id property="className" column="CLASS_NAME"/>
+            <id property="totalCount" column="TOTAL_COUNT"/>
+            <id property="originPrice" column="ORIGIN_PRICE"/>
+            <id property="totalPrice" column="TOTAL_PRICE"/>
+            <id property="halfPrice" column="HALF_PRICE"/>
+            <id property="seatState" column="SEAT_STATE"/>
+            <id property="seatStateName" column="SEAT_STATE_NAME"/>
+            <id property="candidateCount" column="CANDIDATE_COUNT"/>
+            <id property="isVisible" column="IS_VISIBLE"/>
+            <id property="isVisible" column="PUB_CURRENT_COUNT"/>
+            <id property="isVisible" column="LOCAL_CURRENT_COUNT"/>
+            <id property="isVisible" column="FERRY_PASS_TOTAL_COUNT"/>
+            <id property="isVisible" column="LOCAL_PRICE"/>
+            <id property="isVisible" column="LOCAL_HALF_PRICE"/>
+            <id property="isVisible" column="TOTAL_ORIGIN_COUNT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+            ID, LINE_ID, TICKET_TYPE, CLASS_NUM, CLASS_NAME, TOTAL_COUNT, ORIGIN_PRICE, TOTAL_PRICE, HALF_PRICE, SEAT_STATE
+              , SEAT_STATE_NAME, CANDIDATE_COUNT, IS_VISIBLE, PUB_CURRENT_COUNT, LOCAL_CURRENT_COUNT, FERRY_PASS_TOTAL_COUNT
+              , LOCAL_PRICE, LOCAL_HALF_PRICE,TOTAL_ORIGIN_COUNT
+    </sql>
+
+</mapper>

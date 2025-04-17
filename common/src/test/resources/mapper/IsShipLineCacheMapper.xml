@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiacong.mapper.SysGroupMapper">
+
+    <resultMap id="BaseResultMap" type="com.xiacong.util.IsShipLineCache">
+            <id property="id" column="ID"/>
+            <id property="lineNum" column="LINE_NUM"/>
+            <id property="lineName" column="LINE_NAME"/>
+            <id property="lineNo" column="LINE_NO"/>
+            <id property="shipName" column="SHIP_NAME"/>
+            <id property="dwh" column="DWH"/>
+            <id property="startPortNo" column="START_PORT_NO"/>
+            <id property="startPortName" column="START_PORT_NAME"/>
+            <id property="endPortNo" column="END_PORT_NO"/>
+            <id property="endPortName" column="END_PORT_NAME"/>
+            <id property="sailDate" column="SAIL_DATE"/>
+            <id property="sailTime" column="SAIL_TIME"/>
+            <id property="busStartTime" column="BUS_START_TIME"/>
+            <id property="sx" column="SX"/>
+            <id property="lineDirect" column="LINE_DIRECT"/>
+            <id property="saleBeginTime" column="SALE_BEGIN_TIME"/>
+            <id property="saleEndTime" column="SALE_END_TIME"/>
+            <id property="stopSaleTime" column="STOP_SALE_TIME"/>
+            <id property="onSale" column="ON_SALE"/>
+            <id property="offSaleMsg" column="OFF_SALE_MSG"/>
+            <id property="buyTicketType" column="BUY_TICKET_TYPE"/>
+            <id property="clxh" column="CLXH"/>
+            <id property="clxm" column="CLXM"/>
+            <id property="hxlxh" column="HXLXH"/>
+            <id property="hxlxm" column="HXLXM"/>
+            <id property="bus" column="BUS"/>
+            <id property="bus2" column="BUS2"/>
+            <id property="lineState" column="LINE_STATE"/>
+            <id property="lineStateName" column="LINE_STATE_NAME"/>
+            <id property="embarkPortName" column="EMBARK_PORT_NAME"/>
+            <id property="freeChildCount" column="FREE_CHILD_COUNT"/>
+            <id property="candidateTimeEnd" column="CANDIDATE_TIME_END"/>
+            <id property="portMemos" column="PORT_MEMOS"/>
+            <id property="timeMemos" column="TIME_MEMOS"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID
+        , LINE_NUM, LINE_NAME, LINE_NO, SHIP_NAME, DWH, START_PORT_NO, START_PORT_NAME, END_PORT_NO, END_PORT_NAME
+          , SAIL_DATE, SAIL_TIME, BUS_START_TIME, SX, LINE_DIRECT, SALE_BEGIN_TIME, SALE_END_TIME, STOP_SALE_TIME
+          , ON_SALE, OFF_SALE_MSG, BUY_TICKET_TYPE, CLXH,CLXM, HXLXH, HXLXM, BUS, BUS2, LINE_STATE, LINE_STATE_NAME
+          , EMBARK_PORT_NAME, FREE_CHILD_COUNT, CANDIDATE_TIME_END, PORT_MEMOS, TIME_MEMOS
+    </sql>
+
+</mapper>

@@ -1,0 +1,17 @@
+server:
+  port: 7412
+  shutdown: graceful #优雅停机
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: mock
+  lifecycle:
+    timeout-per-shutdown-phase: 30s #t缓冲时间配置，默认30s
+  #启动虚拟线程
+  threads:
+    virtual:
+      enabled: true
+log:
+  path:  /data/mock
+  level: DEBUG

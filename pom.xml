@@ -26,6 +26,9 @@
         <module>alibaba-ai</module>
         <module>nacos-dubbo</module>
         <module>mq-provider</module>
+        <module>test</module>
+        <module>mock</module>
+        <module>tencent-ai</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -321,6 +324,13 @@
                 <artifactId>spring-boot-starter-amqp</artifactId>
                 <version>${spring-boot-amqp.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java-v3</artifactId>
+                <version>3.1.38.ALL</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
