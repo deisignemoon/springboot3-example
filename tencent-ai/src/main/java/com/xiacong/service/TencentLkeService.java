@@ -2,7 +2,9 @@ package com.xiacong.service;
 
 import com.tencentcloudapi.lke.v20231130.models.MsgRecord;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -16,6 +18,8 @@ import java.util.List;
  */
 public interface TencentLkeService {
 
-    void completion(String message, String sessionId, HttpServletResponse rp);
+    void completion(String message, String sessionId, SseEmitter sseEmitter);
     List<MsgRecord> history(String sessionId);
+
+    void completion2(String message, String sessionId, PrintWriter writer);
 }

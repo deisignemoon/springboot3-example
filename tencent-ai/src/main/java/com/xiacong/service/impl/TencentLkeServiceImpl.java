@@ -13,12 +13,13 @@ import com.xiacong.utils.tencent.HttpSSE;
 import com.xiacong.utils.tencent.SSEListener;
 import com.xiacong.utils.tencent.model.HttpSSEReqDTO;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,8 +42,8 @@ public class TencentLkeServiceImpl implements TencentLkeService {
     public String APPKEY;
     @Resource
     private HttpSSE httpSSE;
-    @Resource
-    private SSEListener sseListener;
+    //@Resource
+    //private SSEListener sseListener;
     @Resource
     private Credential credential;
 
@@ -50,17 +51,19 @@ public class TencentLkeServiceImpl implements TencentLkeService {
 
 
     @Override
-    public void completion(String message, String sessionId, HttpServletResponse rp) {
+    public void completion(String message, String sessionId, SseEmitter sseEmitter) {
         if (StringUtils.isBlank(sessionId)) {
             sessionId = UUID.randomUUID().toString();
         }
         String reqId = UUID.randomUUID().toString();
-        sseListener.setRp(rp);
+        SSEListener sseListener = new SSEListener();
+        sseListener.setSseEmitter(sseEmitter);
         HttpSSEReqDTO dto = new HttpSSEReqDTO();
         dto.setContent(message);
         dto.setRequest_id(reqId);
         dto.setSession_id(sessionId);
         dto.setVisitor_biz_id(VISITOR_BIZ_ID);
+        sseListener.setChatGlmDto(dto);
         httpSSE.sseInvoke(dto, sseListener);
     }
 
@@ -92,5 +95,22 @@ public class TencentLkeServiceImpl implements TencentLkeService {
             throw new RuntimeException(e);
         }
         return list;
+    }
+
+    @Override
+    public void completion2(String message, String sessionId, PrintWriter writer) {
+        if (StringUtils.isBlank(sessionId)) {
+            sessionId = UUID.randomUUID().toString();
+        }
+        String reqId = UUID.randomUUID().toString();
+        SSEListener sseListener = new SSEListener();
+        sseListener.setWriter(writer);
+        HttpSSEReqDTO dto = new HttpSSEReqDTO();
+        dto.setContent(message);
+        dto.setRequest_id(reqId);
+        dto.setSession_id(sessionId);
+        dto.setVisitor_biz_id(VISITOR_BIZ_ID);
+        sseListener.setChatGlmDto(dto);
+        httpSSE.sseInvoke(dto, sseListener);
     }
 }

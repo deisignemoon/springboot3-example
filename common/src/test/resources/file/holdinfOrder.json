@@ -1,0 +1,143 @@
+{
+  "lineNum": 1920,
+  "lineName": "洋山至泗礁",
+  "lineNo": 25027,
+  "shipName": "舟桥5轮",
+  "dwh": "23",
+  "startPortNo": 28,
+  "startPortName": "嵊泗(沈家湾)",
+  "endPortNo": 10,
+  "endPortName": "嵊泗(泗礁)",
+  "sailDate": "2025-03-05",
+  "sailTime": "20:00",
+  "busStartTime": "",
+  "sx": 0,
+  "lineDirect": 1,
+  "saleBeginTime": "07:00",
+  "saleEndTime": "23:00",
+  "stopSaleTime": "20",
+  "onSale": true,
+  "offSaleMsg": null,
+  "buyTicketType": 2,
+  "clxh": 5,
+  "clxm": "客滚船",
+  "hxlxh": 0,
+  "hxlxm": "正常航班",
+  "bus": 0,
+  "bus2": 0,
+  "lineState": 0,
+  "lineStateName": "正常",
+  "embarkPortName": null,
+  "freeChildCount": 2,
+  "candidateTimeEnd": null,
+  "portMemos": "",
+  "timeMemos": "约1小时50分",
+  "seatClasses": [
+    {
+      "classNum": 31,
+      "className": "上舱",
+      "totalCount": 50,
+      "originPrice": 50,
+      "ticPrice": null,
+      "totalPrice": 50,
+      "halfPrice": 25,
+      "seatState": 0,
+      "seatStateName": "正常",
+      "candidateCount": 0,
+      "isVisible": null,
+      "pubCurrentCount": 50,
+      "localCurrentCount": 20,
+      "ferryPassTotalCount": 50,
+      "localPrice": 50,
+      "localHalfPrice": 25,
+      "totalOriginCount": null,
+      "selected": false
+    }
+  ],
+  "driverSeatClass": [
+    {
+      "classNum": 62,
+      "className": "7座以下",
+      "totalCount": 25,
+      "originPrice": 220,
+      "ticPrice": null,
+      "totalPrice": 220,
+      "halfPrice": 220,
+      "seatState": 0,
+      "seatStateName": "正常",
+      "candidateCount": 0,
+      "isVisible": null,
+      "pubCurrentCount": 25,
+      "localCurrentCount": 0,
+      "ferryPassTotalCount": 0,
+      "localPrice": 220,
+      "localHalfPrice": 220,
+      "totalOriginCount": null,
+      "selected": false
+    }
+  ],
+  "sailDateTime": "2025-03-05 20:00:00",
+  "seatClassesInfo": [
+    {
+      "className": "7座以下",
+      "totalCount": "25"
+    }
+  ],
+  "priceAndTotalCount": {
+    "pubTotalCount": "25",
+    "minPrice": "220.0",
+    "localMinPrice": "220.0",
+    "totalCount": "25"
+  },
+  "stateName": null,
+  "timeMemosStr": "约1小时50分",
+  "timeMemosMin": 110,
+  "contactNum": "7fvQoNDlQAIUQWejgiDWYQ==",
+  "linkPerson": "7czh_2D5ZF1qV9dY1VvcNQ==",
+  "linkPhone": "7fvQoNDlQAIUQWejgiDWYQ==",
+  "expireTime": "2025-03-03 10:58:19",
+  "foreOrderItemReqs": [
+    {
+      "passName": "7czh_2D5ZF1qV9dY1VvcNQ==",
+      "priceType": 1,
+      "credentialNum": "gbo0BdlcjjyWjOKh-e2bjJ8AR8BNdLIJBQZU-O_M0cM=",
+      "realFee": 50,
+      "passId": 193,
+      "freeChildCount": 0,
+      "ticketFee": 50,
+      "seatClassName": "上舱",
+      "credentialType": 1,
+      "seatClass": 31,
+      "isLocal": 0,
+      "plateNum": "",
+      "freeChildInfo": [
+        {
+          "parentCredential": "gbo0BdlcjjyWjOKh-e2bjJ8AR8BNdLIJBQZU-O_M0cM=",
+          "childName": "WI7y89rsvoIWNHO1XicS_g==",
+          "card": "o92g_DAgdC1ggn6ef1fIVTLWPd66vWS07JGemflSu-A=",
+          "type": 1
+        }
+      ],
+      "ticPrice": ""
+    },
+    {
+      "passName": "NtS1Ptyk_wOrOgWAwTqBHA==",
+      "priceType": 1,
+      "credentialNum": "uCerMpDCj7yr9TmjdxCsiLYMg73j7qggxecREivbE9M=",
+      "realFee": 220,
+      "passId": 193,
+      "freeChildCount": 0,
+      "ticketFee": 220,
+      "seatClassName": "7座以下",
+      "credentialType": 1,
+      "seatClass": 62,
+      "isLocal": "0",
+      "plateNum": "浙L70309",
+      "freeChildInfo": [],
+      "ticPrice": ""
+    }
+  ],
+  "totalFee": 270,
+  "totalPayFee": 270,
+  "openId": "o5pgR7Za1E48HcOdjgXQVhdAVf8I"
+}

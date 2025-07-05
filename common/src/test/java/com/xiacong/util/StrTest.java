@@ -16,12 +16,16 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Formatter;
 import java.util.List;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author xiacong
@@ -174,6 +178,12 @@ public class StrTest {
         for (String s : split) {
             System.out.println(s);
         }
+
+        String aa="163546-";
+        String[] split1 = StringUtils.splitByWholeSeparator(aa, "-");
+        System.out.println(split1.length);
+        System.out.println(split1[0]);
+        System.out.println(split1[1]);
     }
 
     @Test
@@ -253,5 +263,30 @@ public class StrTest {
         for (String s : split) {
             System.out.println(s);
         }
+    }
+
+    @Test
+    public void test22() {
+        Integer a=null;
+        System.out.println( a==1);
+    }
+
+    @Test
+    public void test23() throws IOException {
+        Stream<String> lines = Files.lines(Paths.get("src/test/resources/file/order.txt"));
+        Set<String> set = new HashSet<>();
+        lines.forEach(s -> {
+            set.add(s);
+        });
+        System.out.println(set);
+        System.out.println(set.size());
+
+    }
+
+    @Test
+    public void test24() throws IOException {
+       String idcard="cQLx9YGbEZaso_uPbNx_PxI7ik20tzwmQM4YRGYj-L8=";
+       String s = AesUtil.decrypt(idcard);
+        System.out.println(s);
     }
 }

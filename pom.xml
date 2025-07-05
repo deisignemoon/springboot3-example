@@ -29,6 +29,7 @@
         <module>test</module>
         <module>mock</module>
         <module>tencent-ai</module>
+        <module>dougong-test</module>
     </modules>
     <packaging>pom</packaging>
 

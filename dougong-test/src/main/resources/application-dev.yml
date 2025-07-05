@@ -1,0 +1,32 @@
+server:
+  port: 8080
+  shutdown: graceful #优雅停机
+spring:
+  main:
+    allow-circular-references: false
+  application:
+    name: dougong-test
+  lifecycle:
+    timeout-per-shutdown-phase: 30s #t缓冲时间配置，默认30s
+log:
+  level: DEBUG
+dougong:
+  wx_appid: wx3ffxxxxxede307
+  ##商户号：
+  merchant_id: 6666xxxxx30839
+  #商户名称：
+  merchant_name: 舟山智xxxxx限公司
+  #sys_id：
+  sys_id: 66660xxxxx0839
+  #product_id：PAYUN
+  product_id: PAYUN
+  #超时时间
+  custom_socket_timeout: 8000
+  custom_connect_timeout: 8000
+  custom_connection_request_timeout: 8000
+  merchant_private_key: xxxxx
+  merchant_public_key: xxxxx
+  huifu_public_key: xxxxx
+  debug: true
+  env: dev
+  notify_url: https://ysstest.xxxxx:wq.net/island-cloud-server/order/huifu/notify

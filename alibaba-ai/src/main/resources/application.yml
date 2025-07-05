@@ -6,4 +6,4 @@ spring:
   cloud:
     ai:
       tongyi:
-        apiKey: sk-9a******************************cb3
+        apiKey: sk-xxx

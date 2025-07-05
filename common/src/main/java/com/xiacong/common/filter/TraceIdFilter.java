@@ -20,7 +20,7 @@ import java.io.IOException;
  * 缺点：需要处理http请求对象进行复制
  */
 @Slf4j
-@WebFilter(filterName = "traceIdFilter", urlPatterns = "/*")
+@WebFilter(filterName = "traceIdFilter", urlPatterns = "/*", asyncSupported = true)
 @Order(0)
 public class TraceIdFilter implements Filter {
     @Override

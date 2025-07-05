@@ -31,13 +31,20 @@ public class IslandUtil {
 
     private static String url = "https://fsy.shengsi.gov.cn/island-cloud-server/travel/wallet/info/flowPage?homestayId=&order=&orderField=&page=1&limit=10&consumeType=&startDate=&endDate=&flowType=&merchantId=&orderCode=";
     private static String url2 = "&payType=&merchantType=3&_t=1744013846320";
-    private static String token="Bearer fa167458-7998-4b3f-b115-3d2bd5f5a3ce";
+    private static String token= "Bearer 853d2d9b-e68f-4463-9f78-5a4cb01e9b38";
 
     private static String orderUrl1="https://fsy.shengsi.gov.cn/island-cloud-server/travel/isshiporder/pageDetailAndOrder?homestayId=&order=&orderField=&page=1&limit=10&sailTime=&orderId=";
     private static String orderUrl2="&createTime=&_t=1744024029843";
 
+    private static String orderUrl3="https://fsy.shengsi.gov.cn/island-cloud-server/travel/api/ship/order/detail/";
 
 
+
+    /**
+     * 交易明细
+     * @param orderCode
+     * @return
+     */
     public String invoke(String orderCode){
         HttpRequest request = HttpUtil.createGet(url+orderCode+url2).header("Authorization",token).charset("UTF-8");
         HttpResponse response = request.execute();
@@ -49,8 +56,25 @@ public class IslandUtil {
         return resJson.getString("data");
     }
 
+    /**
+     * 订单详情
+     * @param orderCode
+     * @return
+     */
     public String invoke2(String orderCode){
         HttpRequest request = HttpUtil.createGet(orderUrl1+orderCode+orderUrl2).header("Authorization",token).charset("UTF-8");
+        HttpResponse response = request.execute();
+        String body = response.body();
+        int status = response.getStatus();
+        JSONObject resJson = JSONObject.parseObject(body);
+        Integer code = resJson.getInteger("Code");
+        String message = resJson.getString("Message");
+        return resJson.getString("data");
+    }
+
+
+    public String invoke3(String orderCode){
+        HttpRequest request = HttpUtil.createPost(orderUrl3+orderCode).body("{}").charset("UTF-8");
         HttpResponse response = request.execute();
         String body = response.body();
         int status = response.getStatus();

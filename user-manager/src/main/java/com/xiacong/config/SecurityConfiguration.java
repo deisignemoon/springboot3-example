@@ -51,6 +51,8 @@ public class SecurityConfiguration {
     private AuthenticationProvider authenticationProvider;
     @Resource
     private AuthIgnoreConfig authIgnoreConfig;
+    @Resource
+    private SignatureValidationFilter signatureValidationFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -107,7 +109,9 @@ public class SecurityConfiguration {
                 // 异常处理器
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint).accessDeniedHandler(jwtAccessDeniedHandler))
                 // 添加jwt过滤器
-                .authenticationProvider(authenticationProvider).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .authenticationProvider(authenticationProvider).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                // 添加签名验证过滤器
+                .addFilterAfter(signatureValidationFilter, JwtAuthenticationFilter.class);
         return http.build();
     }
 

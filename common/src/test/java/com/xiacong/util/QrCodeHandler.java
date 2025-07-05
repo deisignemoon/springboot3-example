@@ -1,27 +1,23 @@
 package com.xiacong.util;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import cn.hutool.extra.qrcode.QrConfig;
+import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.xiacong.common.exception.ServiceException;
 import com.xiacong.common.request.QrCodeInfoDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.CollectionUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +25,8 @@ import java.util.Map;
 
 @Slf4j
 public class QrCodeHandler {
+
+    private static final String BASE64_PREFIX = "data:image/jpg;base64,";
 
 
     public InputStream handel(QrCodeInfoDTO dto) {
@@ -94,15 +92,35 @@ public class QrCodeHandler {
         }
         return map;
     }
+
+    public String bas464Str(byte[] bytes) {
+        Base64.Encoder encoder = Base64.getEncoder();
+        byte[] encode = encoder.encode(bytes);
+        return BASE64_PREFIX + new String(encode);
+
+    }
+
     @Test
-    public void test() {
+    public void test() throws IOException {
         InputStream handel = new QrCodeHandler().handel(new QrCodeInfoDTO(
                 """
-                         aaa
-                         bbb
-                         ccc
-                         """, "123", "POST", "/aaa/ddd", "null", null));
+                        aaa
+                        bbb
+                        ccc
+                        """, "123", "POST", "/aaa/ddd", "null", null));
         //输入流转为文件流并保存
-        FileUtil.writeFromStream(handel, "D:\\code\\springboot3-example\\common\\src\\test\\resources\\file\\test.png");
+        //FileUtil.writeFromStream(handel, "D:\\code\\springboot3-example\\common\\src\\test\\resources\\file\\test.png");
+        byte[] bytes = handel.readAllBytes();
+        String s = bas464Str(bytes);
+        System.out.println(s);
+    }
+
+    @Test
+    public void test03(){
+        byte[] bytes = HttpUtil.downloadBytes("https://img.xjishu.com/img/zl/2018/6/30/1241359458913.gif");
+        //bytes转为InputStream
+        InputStream inputStream = new ByteArrayInputStream(bytes);
+        String decode = QrCodeUtil.decode(inputStream);
+        System.out.println(decode);
     }
 }

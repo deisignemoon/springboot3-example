@@ -71,5 +71,5 @@ public class HttpSSEReqDTO {
      * 检索知识库范围设置场景：
      * 自定义参数可用于设置知识库检索范围，如需传入多个参数值，使用英文竖线分隔(|)，例如： "user1|user2"。
      */
-    private Map<String,String> custom_variables;
+    private Map<String, String> custom_variables;
 }

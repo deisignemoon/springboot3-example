@@ -101,5 +101,6 @@ public class AliConfig {
             AlipayUserInfoShareDefaultResponse errorObject = (AlipayUserInfoShareDefaultResponse) e.getErrorObject();
             System.out.println("调用失败:" + errorObject);
         }
+        return null;
     }
 }

@@ -26,9 +26,9 @@ spring:
           type: com.alibaba.druid.pool.DruidDataSource
           driver-class-name: com.mysql.cj.jdbc.Driver
         slave: # 从库
-          url: jdbc:dm://49.232.191.50:5236?schema=ISLAND
-          username: ISLAND
-          password: dm8@szhd
+          url: jdbc:dm://192.168.197.100:5236?schema=ISLAND
+          username: xxx
+          password: xxx
           type: com.alibaba.druid.pool.DruidDataSource
           driver-class-name: dm.jdbc.driver.DmDriver
   #  单数据源配置

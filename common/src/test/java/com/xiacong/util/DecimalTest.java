@@ -1,5 +1,6 @@
 package com.xiacong.util;
 
+import cn.hutool.core.util.NumberUtil;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -31,6 +32,14 @@ public class DecimalTest {
         list.add("10.02");
         list.add("89.98");
         System.out.println(list.toArray());
+        BigDecimal orderRealityPay = NumberUtil.mul(NumberUtil.div(new BigDecimal("90"),new BigDecimal("270")), new BigDecimal("270"));
+        System.out.println(orderRealityPay.toString());
+        BigDecimal orderRealityPay2 = NumberUtil.mul(NumberUtil.div(new BigDecimal("220"),new BigDecimal("270")), new BigDecimal("90"));
+        System.out.println(orderRealityPay2.toString());
+        double a=90.00d;
+        double b=270.00d;
+        System.out.println(a/b*b);
+
     }
 
     @Test

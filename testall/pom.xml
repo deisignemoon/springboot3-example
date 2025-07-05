@@ -56,6 +56,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/lib/DmJdbcDriver11.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.huifu.bspay.sdk</groupId>
+            <artifactId>dg-java-sdk</artifactId>
+            <version>3.0.21</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
