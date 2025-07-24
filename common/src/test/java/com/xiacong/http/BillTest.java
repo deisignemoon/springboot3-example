@@ -31,7 +31,7 @@ public class BillTest {
 
     @Test
     public void test01() throws IOException {
-        Stream<String> lines = Files.lines(Paths.get("src/test/resources/file/20250626.txt"));
+        Stream<String> lines = Files.lines(Paths.get("src/test/resources/file/20250711.txt"));
         List<Object> list = new ArrayList<>();
         lines.forEach(ele -> {
             String[] split = StringUtils.split(ele, "|");
@@ -57,7 +57,7 @@ public class BillTest {
             }
             map.get(orderId).add((Bill) ele);
         });
-        DateTime time = DateUtil.parse("2025-06-26", "yyyy-MM-dd");
+        DateTime time = DateUtil.parse("2025-07-11", "yyyy-MM-dd");
         DateTime start = DateUtil.beginOfDay(time);
         DateTime end = DateUtil.endOfDay(time);
         BigDecimal total1 = BigDecimal.ZERO;

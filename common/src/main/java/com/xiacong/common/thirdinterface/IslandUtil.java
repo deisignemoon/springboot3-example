@@ -31,7 +31,7 @@ public class IslandUtil {
 
     private static String url = "https://fsy.shengsi.gov.cn/island-cloud-server/travel/wallet/info/flowPage?homestayId=&order=&orderField=&page=1&limit=10&consumeType=&startDate=&endDate=&flowType=&merchantId=&orderCode=";
     private static String url2 = "&payType=&merchantType=3&_t=1744013846320";
-    private static String token= "Bearer 853d2d9b-e68f-4463-9f78-5a4cb01e9b38";
+    private static String token= "Bearer e3459e3b-a977-4dc2-aeaa-8a7e94cb4f21";
 
     private static String orderUrl1="https://fsy.shengsi.gov.cn/island-cloud-server/travel/isshiporder/pageDetailAndOrder?homestayId=&order=&orderField=&page=1&limit=10&sailTime=&orderId=";
     private static String orderUrl2="&createTime=&_t=1744024029843";
