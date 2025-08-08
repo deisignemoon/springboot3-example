@@ -6,6 +6,7 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.xiacong.common.thirdinterface.IslandUtil;
+import com.xiacong.util.AesUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.CollectionUtils;
@@ -31,7 +32,7 @@ public class BillTest {
 
     @Test
     public void test01() throws IOException {
-        Stream<String> lines = Files.lines(Paths.get("src/test/resources/file/20250711.txt"));
+        Stream<String> lines = Files.lines(Paths.get("src/test/resources/file/20250729.txt"));
         List<Object> list = new ArrayList<>();
         lines.forEach(ele -> {
             String[] split = StringUtils.split(ele, "|");
@@ -57,7 +58,7 @@ public class BillTest {
             }
             map.get(orderId).add((Bill) ele);
         });
-        DateTime time = DateUtil.parse("2025-07-11", "yyyy-MM-dd");
+        DateTime time = DateUtil.parse("2025-07-29", "yyyy-MM-dd");
         DateTime start = DateUtil.beginOfDay(time);
         DateTime end = DateUtil.endOfDay(time);
         BigDecimal total1 = BigDecimal.ZERO;
@@ -157,7 +158,7 @@ public class BillTest {
 
     @Test
     public void test02() throws IOException {
-        Stream<String> lines = Files.lines(Paths.get("src/test/resources/file/20250526.txt"));
+        Stream<String> lines = Files.lines(Paths.get("src/test/resources/file/20250731.txt"));
         List<Bill> list = new ArrayList<>();
         lines.forEach(ele -> {
             String[] split = StringUtils.split(ele, "|");
@@ -317,6 +318,13 @@ public class BillTest {
             map.get(orderId).add((Bill) ele);
         });
         return map;
+    }
+
+    @Test
+    public void aesTest(){
+        String str= "6_sRo0Z6dp9slYj0DUuDmg==";
+        String decrypt = AesUtil.decrypt(str);
+        System.out.println(decrypt);
     }
 
 }

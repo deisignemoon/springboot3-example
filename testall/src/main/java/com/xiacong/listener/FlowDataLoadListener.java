@@ -15,6 +15,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.List;
 
@@ -34,7 +36,13 @@ public class FlowDataLoadListener {
     private VirtualTableDataCache tableDataCache;
 
     @Async("controlAsync")
-    @EventListener(VirtualTableCacheRefershFinishEvent.class)
+    @TransactionalEventListener(
+            //监听事件
+            classes = VirtualTableCacheRefershFinishEvent.class,
+            //前置事务提交后执行
+            phase = TransactionPhase.AFTER_COMMIT,
+            //无事务同样执行
+            fallbackExecution = true)
     public void init(VirtualTableCacheRefershFinishEvent event) {
         List<VirtualTableData> flowDatas = tableDataCache.findTableDatas("flow");
         List<VirtualTableData> flowNodeDatas = tableDataCache.findTableDatas("flowNode");
