@@ -36,7 +36,7 @@ public class TraceIdFilter implements Filter {
         if (StringUtils.isNotEmpty(header)) {
             MDC.put(CommonConstant.TRACE_ID, header);
         } else {
-            MDC.put(CommonConstant.TRACE_ID, TraceIdUtil.createTraceId());
+            MDC.put(CommonConstant.TRACE_ID, TraceIdUtil.createTraceId(null));
         }
         log.debug("请求接口:{}", request.getRequestURI());
         chain.doFilter(requestWrapper, response);

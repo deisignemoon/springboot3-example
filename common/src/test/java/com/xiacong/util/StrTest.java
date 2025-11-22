@@ -289,4 +289,13 @@ public class StrTest {
        String s = AesUtil.decrypt(idcard);
         System.out.println(s);
     }
+
+    @Test
+    public void test25() throws IOException {
+        StringJoiner joiner = new StringJoiner("-");
+        joiner.add("0");
+        System.out.println(joiner.toString());
+        joiner.add("1").add("2").add("3").add("4").add("5");
+        System.out.println(joiner.toString());
+    }
 }

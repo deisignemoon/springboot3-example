@@ -9,6 +9,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 异步线程池，带有MDC的那种
@@ -18,6 +19,8 @@ import java.util.concurrent.Future;
  * @since 2022/1/21
  */
 public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
+
+    private static AtomicInteger threadNumber = new AtomicInteger(1);
 
     public MdcThreadPoolTaskExecutor() {
     }
@@ -77,6 +80,8 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
             if (null != context) {
                 if (!context.containsKey(CommonConstant.TRACE_ID)) {
                     context.put(CommonConstant.TRACE_ID, TraceIdUtil.getTraceId());
+                } else {
+                    context.put(CommonConstant.TRACE_ID, context.get(CommonConstant.TRACE_ID) + CommonConstant.AEPARATOR1 + threadNumber.getAndIncrement());
                 }
                 MDC.setContextMap(context);
             } else {
@@ -87,6 +92,7 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
                 return task.call();
             } finally {
                 if (null != context && !context.isEmpty()) {
+                    threadNumber.getAndDecrement();
                     MDC.clear();
                 }
             }
@@ -103,6 +109,8 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
             if (null != context) {
                 if (!context.containsKey(CommonConstant.TRACE_ID)) {
                     context.put(CommonConstant.TRACE_ID, TraceIdUtil.getTraceId());
+                } else {
+                    context.put(CommonConstant.TRACE_ID, context.get(CommonConstant.TRACE_ID) + CommonConstant.AEPARATOR1 + threadNumber.getAndIncrement());
                 }
                 MDC.setContextMap(context);
             } else {
@@ -113,6 +121,7 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
                 runnable.run();
             } finally {
                 if (null != context && !context.isEmpty()) {
+                    threadNumber.getAndDecrement();
                     MDC.clear();
                 }
             }

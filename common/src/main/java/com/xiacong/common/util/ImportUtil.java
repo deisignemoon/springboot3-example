@@ -4,6 +4,8 @@ import org.apache.poi.ss.usermodel.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
+
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,6 +13,36 @@ import java.util.*;
 
 public class ImportUtil {
 
+    public static <T> List<T> importEntities(InputStream stream, Class<T> entityClass) throws Exception {
+        // 创建Excel工作簿
+        Workbook workbook = WorkbookFactory.create(stream);
+
+        // 获取第一个工作表
+        Sheet sheet = workbook.getSheetAt(0);
+
+        // 获取标题行的列名
+        Row titleRow = sheet.getRow(0);
+        List<String> columnNames = getColumnNames(titleRow);
+
+        // 创建实体对象列表
+        List<T> entities = new ArrayList<>();
+
+        // 迭代每一行（跳过标题行）
+        Iterator<Row> iterator = sheet.iterator();
+        iterator.next(); // 跳过标题行
+        while (iterator.hasNext()) {
+            Row row = iterator.next();
+
+            // 读取单元格数据并创建实体对象
+            T entity = createEntityFromRow(row, columnNames, entityClass);
+            entities.add(entity);
+        }
+
+        // 关闭工作簿
+        workbook.close();
+
+        return entities;
+    }
     public static <T> List<T> importEntities(MultipartFile file, Class<T> entityClass) throws Exception {
         // 创建Excel工作簿
         Workbook workbook = WorkbookFactory.create(file.getInputStream());

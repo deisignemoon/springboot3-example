@@ -21,7 +21,7 @@ public class TraceIdUtil {
     public static void setTraceId() {
         String traceId = MDC.get(CommonConstant.TRACE_ID);
         if (StringUtils.isEmpty(traceId)) {
-            MDC.put(CommonConstant.TRACE_ID, createTraceId());
+            MDC.put(CommonConstant.TRACE_ID, createTraceId(null));
         }
     }
 
@@ -33,8 +33,12 @@ public class TraceIdUtil {
         return MDC.get(CommonConstant.TRACE_ID);
     }
 
-    public static String createTraceId() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(CommonConstant.DATE_TIME_FORMATE4)) + SequenceUtil.getUuId();
+    public static String createTraceId(String prefix) {
+        String res = LocalDateTime.now().format(DateTimeFormatter.ofPattern(CommonConstant.DATE_TIME_FORMATE4)) + SequenceUtil.getUuId();
+        if (StringUtils.isNotBlank(prefix)) {
+            res = res + CommonConstant.AEPARATOR1 + prefix;
+        }
+        return res;
     }
 
     public static void removeTraceId() {

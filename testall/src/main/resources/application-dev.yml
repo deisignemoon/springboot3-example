@@ -1,6 +1,8 @@
 server:
   port: 8080
   shutdown: graceful #优雅停机
+  servlet:
+    context-path: /
 spring:
   main:
     allow-circular-references: false

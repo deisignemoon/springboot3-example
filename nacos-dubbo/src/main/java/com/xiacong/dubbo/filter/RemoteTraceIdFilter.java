@@ -30,7 +30,7 @@ public class RemoteTraceIdFilter implements Filter {
             //取出业务流水号
             String traceId = RpcContext.getCurrentServiceContext().getAttachment(CommonConstant.TRACE_ID);
             if (StringUtils.isEmpty(traceId)) {
-                traceId = TraceIdUtil.createTraceId();
+                traceId = TraceIdUtil.createTraceId(null);
             }
             //slf4j 中设置了日志打印格式用作日志链路追踪
             TraceIdUtil.setTraceId(traceId);
